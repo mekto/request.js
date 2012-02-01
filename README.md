@@ -3,7 +3,7 @@ Request.js
 
 Request.js is a small library for asynchronous http requests.
 
-This library uses methods from ECMAScript 5, so to use it with older browsers (IE7, IE8) use [ES5-Shim](https://github.com/kriskowal/es5-shim/) or [Augments.js](http://augmentjs.com/).
+This library uses methods from ECMAScript 5, so to use it with older browsers (IE7, IE8) use [ES5-Shim](https://github.com/kriskowal/es5-shim/) or [Augment.js](http://augmentjs.com/).
 
 To support JSON in older browsers use [JSON-js](https://github.com/douglascrockford/JSON-js).
 
