@@ -55,7 +55,7 @@
             contentType: this.xhr.getResponseHeader('Content-Type'),
             text: this.xhr.responseText
           };
-          if (response.contentType == 'application/json')
+          if (response.contentType === 'application/json')
             response.json = JSON.parse(response.text, true);
           if (success)
             success.call(this, response);
@@ -97,7 +97,7 @@
       if (value === Object(value)) {
         result = toQueryString(value, key);
       } else if (Array.isArray(object)) {
-        qs = {};
+        var qs = {};
         for (var j = 0; j < object.length; j++)
           qs[j] = object[j];
         result = toQueryString(qs, key);
@@ -112,4 +112,4 @@
 
   exports.Request = Request;
 
-})(typeof exports != 'undefined' ? exports : this);
+})(typeof exports !== 'undefined' ? exports : this);
