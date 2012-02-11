@@ -15,32 +15,26 @@
     return obj;
   };
 
-  var Class = function(body) {
-    var Class = body.constructor;
-    delete body.constructor;
+  var Request = function(options) {
+    this.options = extend({
+      url: null,
+      method: 'GET',
+      data: '',
+      success: null,
+      error: null,
+      complete: ''
+    }, options || {});
 
-    extend(Class.prototype, body);
-    return Class;
+    this.xhr = this.getBrowserXHR();
+    this.headers = {
+      'X-Requested-With': 'XMLHttpRequest',
+      'Accept': 'text/javascript, text/html, application/json, application/xml, text/xml, */*',
+      'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
+    };
   };
 
-  var Request = Class({
-    constructor: function(options) {
-      this.options = extend({
-        url: null,
-        method: 'GET',
-        data: '',
-        success: null,
-        error: null,
-        complete: ''
-      }, options || {});
-
-      this.xhr = this.getBrowserXHR();
-      this.headers = {
-        'X-Requested-With': 'XMLHttpRequest',
-        'Accept': 'text/javascript, text/html, application/json, application/xml, text/xml, */*',
-        'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
-      };
-    },
+  Request.prototype = {
+    constructor: Request,
 
     getBrowserXHR: function() {
       return (window.ActiveXObject) ? new ActiveXObject("Microsoft.XMLHTTP") : (XMLHttpRequest && new XMLHttpRequest()) || null;
@@ -84,7 +78,7 @@
 
       return this;
     }
-  });
+  };
 
   Request.toQueryString = function(object, base) {
     var result, queryString = [];
