@@ -9,9 +9,12 @@
 
 (function(exports) {
 
-  var extend = function(obj, extension) {
-    for (var property in extension)
-      obj[property] = extension[property];
+  var extend = function(obj) {
+    var extensions = Array.prototype.slice.call(arguments, 1);
+    for (var i = 0; i < extensions.length; ++i) {
+      for (var property in extensions[i])
+        obj[property] = extensions[i][property];
+    }
     return obj;
   };
 
@@ -63,7 +66,7 @@
     },
 
     send: function(options) {
-      var config = extend(extend({}, this.options), options || {});
+      var config = extend({}, this.options, options || {});
 
       this.xhr.onreadystatechange = this.onStateChange.bind(this, config.success, config.error, config.complete);
 
